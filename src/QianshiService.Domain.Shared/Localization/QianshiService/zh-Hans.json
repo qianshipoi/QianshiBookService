@@ -35,6 +35,15 @@
     "Permission:Books.Create": "创建",
     "Permission:Books.Edit": "编辑",
     "Permission:Books.Delete": "删除",
-    "BookStore:00001": "已经有一个同名的作者了: {name}"
+    "BookStore:00001": "已经有一个同名的作者了: {name}",
+    "Permission:Authors": "作者管理",
+    "Permission:Authors.Create": "新建作者",
+    "Permission:Authors.Edit": "编辑作者",
+    "Permission:Authors.Delete": "删除作者",
+    "Menu:Authors": "创作者",
+    "Authors": "创作者",
+    "AuthorDeletionConfirmationMessage": "你确定要删除该作者 '{0}'?",
+    "BirthDate": "出生日期",
+    "NewAuthor": "新建作者"
   }
 }

@@ -6,6 +6,6 @@ namespace QianshiService.Authors
 {
     public static class AuthorConsts
     {
-        public const int MaxNameLenght = 64;
+        public const int MaxNameLength = 64;
     }
 }

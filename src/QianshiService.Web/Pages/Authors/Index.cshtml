@@ -1,0 +1,32 @@
+﻿@page
+@using QianshiService.Localization
+@using QianshiService.Permissions
+@using QianshiService.Web.Pages.Authors
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Authorization
+@inject IStringLocalizer<QianshiServiceResource> L
+@inject IAuthorizationService AuthorizationService
+@model IndexModel
+
+@section scripts
+{
+    <abp-script src="/Pages/Authors/Index.js"></abp-script>
+}
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title title="@L["Authors"]"></abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6">
+                @if(await AuthorizationService.IsGrantedAsync(QianshiServicePermissions.Authors.Create))
+                {
+                    <abp-button id="NewAuthorButton" text="@L["NewAuthor"]" icon="plus" button-type="Primary" />
+                }
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="AuthorsTable"></abp-table>
+    </abp-card-body>
+</abp-card>

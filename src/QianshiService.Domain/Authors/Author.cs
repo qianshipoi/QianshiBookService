@@ -40,7 +40,7 @@ namespace QianshiService.Authors
 
         private void SetName(string name)
         {
-            Name = Check.NotNullOrWhiteSpace(name, nameof(name), maxLength: AuthorConsts.MaxNameLenght);
+            Name = Check.NotNullOrWhiteSpace(name, nameof(name), maxLength: AuthorConsts.MaxNameLength);
         }
     }
 }

@@ -93,7 +93,7 @@ public class QianshiServiceDbContext :
             b.ConfigureByConvention();
             b.Property(x => x.Name)
                 .IsRequired()
-                .HasMaxLength(AuthorConsts.MaxNameLenght);
+                .HasMaxLength(AuthorConsts.MaxNameLength);
             b.HasIndex(x => x.Name);
         });
     }

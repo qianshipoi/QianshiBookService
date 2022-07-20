@@ -57,6 +57,12 @@ public class QianshiServiceMenuContributor : IMenuContributor
             booksStore.AddItem(new ApplicationMenuItem("BooksStore.Books", l["Menu:Books"], url: "/Books"));
         }
 
+        if(await context.IsGrantedAsync(QianshiServicePermissions.Authors.Default))
+        {
+            booksStore.AddItem(new ApplicationMenuItem("BooksStore.Authors", l["Menu:Authors"], url: "/Authors"));
+        }
+
+
         await Task.CompletedTask;
     }
 }
