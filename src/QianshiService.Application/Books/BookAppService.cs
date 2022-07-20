@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QianshiService.Permissions;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,12 @@ namespace QianshiService.Books
     {
         public BookAppService(IRepository<Book, Guid> repository) : base(repository)
         {
+            GetPolicyName = QianshiServicePermissions.Books.Default;
+            GetListPolicyName = QianshiServicePermissions.Books.Default;
+            CreatePolicyName = QianshiServicePermissions.Books.Create;
+            UpdatePolicyName = QianshiServicePermissions.Books.Edit;
+            DeletePolicyName = QianshiServicePermissions.Books.Delete;
+
         }
     }
 }

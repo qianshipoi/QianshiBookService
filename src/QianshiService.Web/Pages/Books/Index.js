@@ -18,12 +18,14 @@
                         items: [
                             {
                                 text: l('Edit'),
+                                visible: abp.auth.isGranted('QianshiService.Books.Edit'),
                                 action: function (data) {
                                     editModal.open({ id: data.record.id });
                                 }
                             },
                             {
                                 text: l('Delete'),
+                                visible: abp.auth.isGranted('QianshiService.Books.Delete'),
                                 confirmMessage: function (data) {
                                     return l('BookDeletionConfirmationMessage', data.record.name);
                                 },

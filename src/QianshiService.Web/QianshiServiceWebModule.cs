@@ -38,6 +38,8 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using QianshiService.Permissions;
 
 namespace QianshiService.Web;
 
@@ -86,6 +88,14 @@ public class QianshiServiceWebModule : AbpModule
         ConfigureNavigationServices();
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
+
+        Configure<RazorPagesOptions>(options =>
+        {
+            options.Conventions.AuthorizePage("/Books/Index", QianshiServicePermissions.Books.Default);
+            options.Conventions.AuthorizePage("/Books/CreateModal", QianshiServicePermissions.Books.Create);
+            options.Conventions.AuthorizePage("/Books/EditModal", QianshiServicePermissions.Books.Edit);
+        });
+
     }
 
     private void ConfigureUrls(IConfiguration configuration)

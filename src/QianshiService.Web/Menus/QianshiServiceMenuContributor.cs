@@ -2,6 +2,7 @@
 
 using QianshiService.Localization;
 using QianshiService.MultiTenancy;
+using QianshiService.Permissions;
 
 using Volo.Abp.Identity.Web.Navigation;
 using Volo.Abp.SettingManagement.Web.Navigation;
@@ -49,9 +50,12 @@ public class QianshiServiceMenuContributor : IMenuContributor
         administration.SetSubItemOrder(SettingManagementMenuNames.GroupName, 3);
 
         var booksStore = new ApplicationMenuItem("BooksStore", l["Menu:BookStore"], icon: "fa fa-book");
-        booksStore.AddItem(new ApplicationMenuItem("BooksStore.Books", l["Menu:Books"], url: "/Books"));
-
         context.Menu.AddItem(booksStore);
+
+        if(await context.IsGrantedAsync(QianshiServicePermissions.Books.Default))
+        {
+            booksStore.AddItem(new ApplicationMenuItem("BooksStore.Books", l["Menu:Books"], url: "/Books"));
+        }
 
         await Task.CompletedTask;
     }

@@ -28,6 +28,12 @@
     "Enum:BookType:7": "Science fiction",
     "Enum:BookType:8": "Poetry",
     "BookDeletionConfirmationMessage": "你确定删除这本书籍 '{0}'?",
-    "SuccessfullyDeleted": "删除成功!"
+    "SuccessfullyDeleted": "删除成功!",
+    "Permission:QianshiService": "千矢服务",
+    "Permission:BookStore": "书库",
+    "Permission:Books": "书籍管理",
+    "Permission:Books.Create": "创建",
+    "Permission:Books.Edit": "编辑",
+    "Permission:Books.Delete": "删除"
   }
 }
