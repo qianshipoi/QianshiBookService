@@ -34,6 +34,7 @@
     "Permission:Books": "书籍管理",
     "Permission:Books.Create": "创建",
     "Permission:Books.Edit": "编辑",
-    "Permission:Books.Delete": "删除"
+    "Permission:Books.Delete": "删除",
+    "BookStore:00001": "已经有一个同名的作者了: {name}"
   }
 }

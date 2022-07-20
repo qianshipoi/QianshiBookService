@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using QianshiService.Authors;
 using QianshiService.Books;
 
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -28,8 +29,7 @@ public class QianshiServiceDbContext :
     ITenantManagementDbContext
 {
     public DbSet<Book> Books { get; set; }
-
-    /* Add DbSet properties for your Aggregate Roots / Entities here. */
+    public DbSet<Author> Authors { get; set; }
 
     #region Entities from the modules
 
@@ -85,6 +85,16 @@ public class QianshiServiceDbContext :
             b.ToTable(QianshiServiceConsts.DbTablePrefix + "Books", QianshiServiceConsts.DbSchema);
             b.ConfigureByConvention();
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+        });
+
+        builder.Entity<Author>(b =>
+        {
+            b.ToTable(QianshiServiceConsts.DbTablePrefix + "Authors", QianshiServiceConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(AuthorConsts.MaxNameLenght);
+            b.HasIndex(x => x.Name);
         });
     }
 }
