@@ -10,7 +10,7 @@
     "Close": "Close",
     "Delete": "Delete",
     "Edit": "Edit",
-    "PublishDate": "Publish date",
+    "PublishTime": "Publish date",
     "NewBook": "New book",
     "Name": "Name",
     "Type": "Type",
@@ -26,6 +26,8 @@
     "Enum:BookType:5": "Horror",
     "Enum:BookType:6": "Science",
     "Enum:BookType:7": "Science fiction",
-    "Enum:BookType:8": "Poetry"
+    "Enum:BookType:8": "Poetry",
+    "BookDeletionConfirmationMessage": "Are you sure to delete the book '{0}'?",
+    "SuccessfullyDeleted": "Successfully deleted!"
   }
 }

@@ -1,4 +1,29 @@
 ﻿@page
-@model QianshiService.Web.Pages.Books.IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using QianshiService.Books
+@using QianshiService.Web.Pages.Books
+@using QianshiService.Localization
+@using Microsoft.Extensions.Localization
+@model IndexModel
+@inject IStringLocalizer<QianshiServiceResource> L
 
-<h2>Books</h2>
+    @section scripts
+    {
+        <abp-script src="/Pages/Books/Index.js" />
+    }
+
+    <abp-card>
+        <abp-card-header>
+            <abp-row>
+                <abp-column size-md="_6">
+                    <abp-card-title>@L["Menu:Books"]</abp-card-title>
+                </abp-column>
+                <abp-column size-md="_6">
+                    <abp-button id="NewBookButton" text="@L["NewBook"].Value" icon="plus" button-type="Primary" />
+                </abp-column>
+            </abp-row>
+        </abp-card-header>
+        <abp-card-body>
+            <abp-table striped-rows="true" id="BooksTable"></abp-table>
+        </abp-card-body>
+    </abp-card>
