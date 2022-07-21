@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Volo.Abp.Application.Dtos;
@@ -15,6 +12,6 @@ namespace QianshiService.Books
             PagedAndSortedResultRequestDto, //Used for paging/sorting
             CreateUpdateBookDto> //Used to create/update a book
     {
-
+        Task<ListResultDto<AuthorLookupDto>> GetAuthorLookupAsync();
     }
 }

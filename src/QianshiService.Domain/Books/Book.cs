@@ -13,5 +13,7 @@ namespace QianshiService.Books
         public DateTime PublishTime { get; set; }
 
         public float Price { get; set; }
+
+        public Guid AuthorId { get; set; }
     }
 }

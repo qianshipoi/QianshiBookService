@@ -21,8 +21,8 @@ namespace QianshiService
         private readonly AuthorManager _authorManager;
 
         public QianshiServiceDataSeederContributor(
-            IRepository<Book, Guid> bookRepository, 
-            IAuthorRepository authorRepository, 
+            IRepository<Book, Guid> bookRepository,
+            IAuthorRepository authorRepository,
             AuthorManager authorManager)
         {
             _bookRepository = bookRepository;
@@ -32,42 +32,49 @@ namespace QianshiService
 
         public async Task SeedAsync(DataSeedContext context)
         {
-            if (await _bookRepository.GetCountAsync() <= 0)
+            if (await _bookRepository.GetCountAsync() > 0)
             {
-                await _bookRepository.InsertAsync(new Book
-                {
-                    Name = "1984",
-                    Type = BookType.Dystopia,
-                    PublishTime = new DateTime(1949, 6, 8),
-                    Price = 19.84f
-                }, autoSave: true);
-
-                await _bookRepository.InsertAsync(new Book
-                {
-                    Name = "The Hitchhiker's Guide to the Galaxy",
-                    Type = BookType.ScienceFiction,
-                    PublishTime = new DateTime(1995, 9, 27),
-                    Price = 42.0f
-                }, autoSave: true);
+                return;
             }
 
-            if(await _authorRepository.GetCountAsync() <= 0)
-            {
-                await _authorRepository.InsertAsync(
-                    await _authorManager.CreateAsync(
-                        "栗山未来",
-                        new DateTime(2001, 06, 25),
-                        "kuriyama balabala..."
-                    ));
-
-
-                await _authorRepository.InsertAsync(
+            var qianshi = await _authorRepository.InsertAsync(
                     await _authorManager.CreateAsync(
                         "千矢",
-                        new DateTime(1999, 06, 25),
-                        "qianshi balabala..."
-                    ));
-            }
+                    new DateTime(1999, 12, 12),
+                      "千矢 balabala..."
+                        )
+                );
+
+
+            var kuriyama = await _authorRepository.InsertAsync(
+                    await _authorManager.CreateAsync(
+                        "栗山未来",
+                    new DateTime(1999, 10, 12),
+                      "kuriyama balabala..."
+                        )
+                );
+
+            await _bookRepository.InsertAsync(
+                new Book
+                {
+                    AuthorId = qianshi.Id,
+                    Name = "1984",
+                    Type = BookType.Biography,
+                    PublishTime = DateTime.Now,
+                    Price = 19.88f
+                },
+                autoSave: true
+                );
+
+            await _bookRepository.InsertAsync(new Book
+            {
+                AuthorId = kuriyama.Id,
+                Name = "The Hitchhiker's Guide to the Galaxy",
+                Type = BookType.ScienceFiction,
+                PublishTime = new DateTime(1995, 9, 27),
+                Price = 42.0f
+            }, autoSave: true);
+
         }
     }
 }

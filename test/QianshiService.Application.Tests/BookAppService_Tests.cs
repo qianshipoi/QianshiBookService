@@ -1,11 +1,10 @@
-﻿using QianshiService.Books;
+﻿using QianshiService.Authors;
+using QianshiService.Books;
 
 using Shouldly;
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Volo.Abp.Application.Dtos;
@@ -18,10 +17,12 @@ namespace QianshiService
     public class BookAppService_Tests : QianshiServiceApplicationTestBase
     {
         private readonly IBookAppService _bookAppService;
+        private readonly IAuthorAppService _authorAppService;
 
         public BookAppService_Tests()
         {
             _bookAppService = GetRequiredService<IBookAppService>();
+            _authorAppService = GetRequiredService<IAuthorAppService>();
         }
 
         [Fact]
@@ -30,14 +31,18 @@ namespace QianshiService
             var result = await _bookAppService.GetListAsync(new PagedAndSortedResultRequestDto());
 
             result.TotalCount.ShouldBeGreaterThan(0);
-            result.Items.ShouldContain(b => b.Name == "1984");
+            result.Items.ShouldContain(b => b.Name == "1984" && b.AuthorName == "千矢");
         }
 
         [Fact]
         public async Task Should_Create_A_Vaild_Book()
         {
+            var authors = await _authorAppService.GetListAsync(new GetAuthorListDto());
+            var firstAuthor = authors.Items.First();
+
             var result = await _bookAppService.CreateAsync(new CreateUpdateBookDto
             {
+                AuthorId = firstAuthor.Id,
                 Name = "千矢",
                 Price = 10,
                 PublishDate = DateTime.Now,
@@ -45,7 +50,8 @@ namespace QianshiService
             });
 
             result.Id.ShouldNotBe(Guid.Empty);
-            result.Name.ShouldBe("千矢"); 
+            result.Name.ShouldBe("千矢");
+            result.AuthorId.ShouldBe(firstAuthor.Id);
         }
 
         [Fact]
@@ -62,8 +68,8 @@ namespace QianshiService
                });
            });
 
-            exception.ValidationErrors.ShouldContain(err => err.MemberNames.Any(mem => mem == "Name"));
+            exception.ValidationErrors
+                .ShouldContain(err => err.MemberNames.Any(mem => mem == "Name"));
         }
-
     }
 }
