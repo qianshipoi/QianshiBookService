@@ -36,7 +36,6 @@ namespace QianshiService.Web.Pages.Books
             var bookDto = await _bookAppService.GetAsync(Id);
             Book = ObjectMapper.Map<BookDto, EditBookViewModel>(bookDto);
 
-
             var authorLookup = await _bookAppService.GetAuthorLookupAsync();
             Authors = authorLookup.Items
                 .Select(x => new SelectListItem(x.Name, x.Id.ToString()))
